@@ -7,6 +7,7 @@ import './assets/styles/global.css';
 // Routes
 import Home from './routes/home.js';
 import Form from './routes/form.js';
+import FormSuccess from './routes/formSuccess';
 
 // Components
 import { Dialog } from './components/dialog.js';
@@ -44,7 +45,7 @@ export default class App extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`${process.env.PREACT_APP_DATA_SOURCE}`)
+		fetch(`${process.env.PREACT_APP_DATA_SOURCE}?c=${Math.random().toString(36).split('.')[1]}`)
 			.then(r => r.json())
 			.then(json => {
 				this.setState({
@@ -81,6 +82,7 @@ export default class App extends Component {
 					<Router onChange={this.handleRoute}>
 						<Home path="/" results={results} />
 						<Form path="/form" />
+						<FormSuccess path="/form/success" />
 					</Router>
 				</div>
 				<Dialog isOpen={isPopupOpen} closePopup={this.closePopup} telNumbers={popupNumbers} />
